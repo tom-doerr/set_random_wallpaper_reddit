@@ -19,6 +19,7 @@ feh --bg-fill --no-xinerama /tmp/wallpaper.jpg
 mkdir -p ~/Pictures/Wallpapers/i.redd.it/
 echo "$url" >> ~/Pictures/Wallpapers/url.txt
 mv /tmp/wallpaper.jpg ~/Pictures/Wallpapers/
+
 # Rename the image to the url name.
 mv ~/Pictures/Wallpapers/wallpaper.jpg ~/Pictures/Wallpapers/$(echo "$url" | grep -Eo 'i.redd.it/[^/]*')
 rm urls.txt
