@@ -1,11 +1,22 @@
 #!/bin/bash
 
+wallpaper_id=$1
 
 # Get the list of all links to images from the front page of the Wallpapers subreddit.
 wget -qO- https://www.reddit.com/r/wallpapers/top.json?limit=100 | jq -r '.data.children[].data.url' | grep -Eo 'https://i.redd.it/.*' > urls.txt
 
-# Select random entry from urls.txt.
-url=$(shuf -n 1 urls.txt)
+
+if [ -z "$wallpaper_id" ]; then
+    # Select random entry from urls.txt.
+    url=$(shuf -n 1 urls.txt)
+else
+    # Check if wallpaper_id is valid.
+    if [ "$wallpaper_id" -gt "$(wc -l urls.txt | cut -d' ' -f1)" ]; then
+        exit 1
+    fi
+    url=$(cat urls.txt | grep -Eo 'https://i.redd.it/.*' | head -n $wallpaper_id | tail -n 1)
+fi
+
 
 # Download the image.
 wget -q "$url" -O /tmp/wallpaper.jpg
