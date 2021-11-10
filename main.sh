@@ -32,6 +32,6 @@ mv /tmp/wallpaper.jpg ~/Pictures/Wallpapers/
 
 target_path=~/Pictures/Wallpapers/$(echo "$url" | grep -Eo 'i.redd.it/[^/]*') 
 mv ~/Pictures/Wallpapers/wallpaper.jpg $target_path
-ln -sf $target_path ~/Pictures/Wallpapers/current.jpg
+ln -sf $target_path ~/Pictures/Wallpapers/current
 rm urls.txt
 
